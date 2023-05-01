@@ -5,17 +5,28 @@ import { useState, useCallback } from "react";
 
 export default function List() {
     let products = ["Tomatoes", "Pasta", "Coconut"];
-    let [count, setCount] = useState(0);
+    let [count, setCount] = useState([0, 0, 0]);
 
-    const countUpHandler = useCallback(() => {
-        setCount((value) => value + 1);
+    const countUpHandler = useCallback((index: number) => {
+        setCount((value: number[]) => {
+            const newCount = [...value];
+            newCount[index]++;
+            return newCount;
+        });
     }, []);
 
-    const countDownHandler = useCallback(() => {
-        if (count > 0) {
-            setCount((value) => value - 1);
-        }
-    }, [count]);
+    const countDownHandler = useCallback(
+        (index: number) => {
+            if (count[index] > 0) {
+                setCount((value: number[]) => {
+                    let newCount = [...value];
+                    newCount[index]--;
+                    return newCount;
+                });
+            }
+        },
+        [count]
+    );
 
     return (
         <div>
@@ -36,15 +47,15 @@ export default function List() {
                     <button
                         type="button"
                         className="inline-block w-5 px-1 bg-blue-500 rounded-lg shadow-lg shadow-neutral-500/40"
-                        onClick={countDownHandler}
+                        onClick={countDownHandler.bind(null, index)}
                     >
                         -
                     </button>
-                    <span className="mx-3">{count}</span>
+                    <span className="mx-3">{count[index]}</span>
                     <button
                         type="button"
                         className="inline-block w-5 px-1 bg-blue-500 rounded-lg shadow-lg shadow-neutral-500/40"
-                        onClick={countUpHandler}
+                        onClick={countUpHandler.bind(null, index)}
                     >
                         +
                     </button>
