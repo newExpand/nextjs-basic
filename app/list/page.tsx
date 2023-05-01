@@ -1,7 +1,21 @@
+"use client";
+
 import Image from "next/image";
+import { useState, useCallback } from "react";
 
 export default function List() {
     let products = ["Tomatoes", "Pasta", "Coconut"];
+    let [count, setCount] = useState(0);
+
+    const countUpHandler = useCallback(() => {
+        setCount((value) => value + 1);
+    }, []);
+
+    const countDownHandler = useCallback(() => {
+        if (count > 0) {
+            setCount((value) => value - 1);
+        }
+    }, [count]);
 
     return (
         <div>
@@ -19,6 +33,21 @@ export default function List() {
                         alt=""
                     />
                     <h4>{`${item} ${index + 1}`}만원</h4>
+                    <button
+                        type="button"
+                        className="inline-block w-5 px-1 bg-blue-500 rounded-lg shadow-lg shadow-neutral-500/40"
+                        onClick={countDownHandler}
+                    >
+                        -
+                    </button>
+                    <span className="mx-3">{count}</span>
+                    <button
+                        type="button"
+                        className="inline-block w-5 px-1 bg-blue-500 rounded-lg shadow-lg shadow-neutral-500/40"
+                        onClick={countUpHandler}
+                    >
+                        +
+                    </button>
                 </div>
             ))}
         </div>
