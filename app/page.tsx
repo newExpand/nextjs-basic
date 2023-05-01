@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
     let name = "Lee";
     let link = "http://google.com";
+
     return (
         <div>
             <h4 className="text-center mt-[50vh]">SM프레시</h4>
