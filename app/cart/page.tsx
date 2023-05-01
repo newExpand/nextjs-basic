@@ -1,19 +1,26 @@
+"use client";
+
 import React from "react";
+import Product from "./data";
+import Hello from "./Hello";
 
 export default function Cart() {
     return (
         <div>
             <h4 className="text-center">Cart</h4>
-            <div className="flex justify-around border-b-gray-500 leading-[0] p-2">
-                <p>상품명</p>
-                <p>$40</p>
-                <p>1개</p>
-            </div>
-            <div className="flex justify-around border-b-gray-500 leading-[0] p-2">
-                <p>상품명</p>
-                <p>$40</p>
-                <p>1개</p>
-            </div>
+            <CartItem />
+            <CartItem />
+        </div>
+    );
+}
+
+function CartItem() {
+    return (
+        <div className="flex justify-around border-b leading-[0] p-6">
+            <Hello />
+            <p>상품명 : {Product}</p>
+            <p>$40</p>
+            <p>1개</p>
         </div>
     );
 }
